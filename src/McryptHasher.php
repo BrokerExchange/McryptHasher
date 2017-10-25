@@ -73,7 +73,7 @@ class McryptHasher implements Hasher
             return false;
         }
 
-        return ($this->encrypt($value) === $hashedValue);
+        return ($this->make($value) === $hashedValue);
     }
 
     /**
