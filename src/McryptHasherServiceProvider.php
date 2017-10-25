@@ -18,6 +18,13 @@ use Illuminate\Support\Str;
 class McryptHasherServiceProvider extends ServiceProvider
 {
     /**
+     * Indicates if loading of the provider is deferred.
+     *
+     * @var bool
+     */
+    protected $defer = true;
+
+    /**
      * Bootstrap any application services.
      *
      * @return void
