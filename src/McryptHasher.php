@@ -36,6 +36,7 @@ class McryptHasher implements Hasher
     }
 
     /**
+     * make hash
      * @param string $value
      * @param array $options
      * @return string
@@ -47,29 +48,20 @@ class McryptHasher implements Hasher
             throw new RuntimeException('Invalid hash value');
         }
 
-        return $this->encrypt($value);
-    }
-
-    /**
-     * encrypt the input
-     * @param $input
-     * @return string
-     */
-    private function encrypt($input)
-    {
         $td = @mcrypt_module_open (MCRYPT_BLOWFISH, "", MCRYPT_MODE_ECB, "");
         $iv = @mcrypt_create_iv (@mcrypt_enc_get_iv_size ($td), MCRYPT_RAND);
         @mcrypt_generic_init ($td, $this->key, $iv);
-        $encrypted_data = base64_encode(@mcrypt_generic ($td, $input));
+        $encrypted_data = base64_encode(@mcrypt_generic ($td, $value));
         @mcrypt_generic_deinit($td);
 
         //make sure the encrypted data is valid
         if(empty($encrypted_data)) {
-            throw new RuntimeException('Encryption unsuccessful');
+            throw new RuntimeException('Hash creation unsuccessful');
         }
 
         return $encrypted_data;
     }
+
 
     /**
      * @param string $value
@@ -83,7 +75,7 @@ class McryptHasher implements Hasher
             return false;
         }
 
-        return ($this->encrypt($value) === $hashedValue);
+        return ($this->make($value) === $hashedValue);
     }
 
     /**
