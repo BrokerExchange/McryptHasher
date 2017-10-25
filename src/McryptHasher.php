@@ -52,15 +52,24 @@ class McryptHasher implements Hasher
      */
     private function encrypt($input)
     {
-        if($input<>''){
-            $td = @mcrypt_module_open (MCRYPT_BLOWFISH, "", MCRYPT_MODE_ECB, "");
-            $iv = @mcrypt_create_iv (@mcrypt_enc_get_iv_size ($td), MCRYPT_RAND);
-            @mcrypt_generic_init ($td, $this->key(), $iv);
-            $encrypted_data = base64_encode(@mcrypt_generic ($td, $input));
-            @mcrypt_generic_deinit($td);
-            return $encrypted_data;
+        //make sure the input is valid
+        if(empty($input)) {
+            throw new RuntimeException('Invalid encryption input');
         }
-        return '';
+
+        $td = @mcrypt_module_open (MCRYPT_BLOWFISH, "", MCRYPT_MODE_ECB, "");
+        $iv = @mcrypt_create_iv (@mcrypt_enc_get_iv_size ($td), MCRYPT_RAND);
+        @mcrypt_generic_init ($td, $this->key, $iv);
+        $encrypted_data = base64_encode(@mcrypt_generic ($td, $input));
+        @mcrypt_generic_deinit($td);
+
+        //make sure the encrypted data is valid
+        if(empty($encrypted_data)) {
+            throw new RuntimeException('Encryption unsuccessful');
+        }
+
+        return $encrypted_data;
+
     }
 
     /**
