@@ -21,10 +21,20 @@ class McryptHasherServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function register()
     {
         $this->app->singleton('hash', function () {
             return new McryptHasher;
         });
+    }
+
+    /**
+     * Get the services provided by the provider.
+     *
+     * @return array
+     */
+    public function provides()
+    {
+        return ['hash'];
     }
 }
