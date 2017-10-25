@@ -9,6 +9,7 @@
 namespace McryptHasher;
 
 use Illuminate\Contracts\Hashing\Hasher;
+use RuntimeException;
 
 /**
  * Class McryptHasher
@@ -17,6 +18,24 @@ use Illuminate\Contracts\Hashing\Hasher;
 class McryptHasher implements Hasher
 {
     /**
+     * @var
+     */
+    protected $key;
+
+    /**
+     * McryptHasher constructor.
+     * @param $key
+     */
+    public function __construct($key)
+    {
+        if(empty($key)) {
+            throw new RuntimeException('Unsupported hash key value');
+        }
+
+        $this->key = $key;
+    }
+
+    /**
      * @param string $value
      * @param array $options
      * @return string
@@ -24,12 +43,6 @@ class McryptHasher implements Hasher
     public function make($value, array $options = [])
     {
         return $this->encrypt($value);
-    }
-
-
-    private function key()
-    {
-        return config('app.key');
     }
 
     /**

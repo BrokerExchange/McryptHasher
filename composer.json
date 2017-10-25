@@ -15,9 +15,11 @@
       "email": "brian@brokerbin.com"
     }
   ],
-  "minimum-stability": "stable",
+  "minimum-stability": "dev",
   "require": {
-    "php-mcrypt": ">=5.6.0"
+    "php-mcrypt": ">=5.6.0",
+    "illuminate/contracts": "^5.2",
+    "illuminate/support": "^5.2"
   },
   "autoload": {
     "psr-4": {

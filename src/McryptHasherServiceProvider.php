@@ -9,6 +9,7 @@
 namespace McryptHasher;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
 
 /**
  * Class ElasticScoutServiceProvider
@@ -23,8 +24,17 @@ class McryptHasherServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->mergeConfigFrom(
+            __DIR__.'/../config/mcrypt.php', 'app.mcrypt'
+        );
+
         $this->app->singleton('hash', function () {
-            return new McryptHasher;
+
+            if (Str::startsWith($key = config('app.mcrypt.key'), 'base64:')) {
+                $key = base64_decode(substr($key, 7));
+            }
+
+            return new McryptHasher($key);
         });
     }
 
