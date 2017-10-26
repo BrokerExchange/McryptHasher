@@ -1,8 +1,11 @@
 # McryptHasher
 Mcrypt Hasher For Laravel Auth
 
+This package will replace Laravel's default hash service provider.
+
 ## Installation
-- `composer require brokerexchange/mcrypthasher`
-- HASH_KEY env var `HASH_KEY='My awesome hash key'`
+1. `composer require brokerexchange/mcrypthasher`
+2. Add HASH_KEY to your .env file
+    - `HASH_KEY='My awesome hash key'`
 
 Copyright &copy; 2017 Broker Exchange Network
