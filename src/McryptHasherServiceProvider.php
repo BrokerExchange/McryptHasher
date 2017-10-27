@@ -12,8 +12,8 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 
 /**
- * Class ElasticScoutServiceProvider
- * @package ElasticScout
+ * Class McryptHasherServiceProvider
+ * @package McryptHasher
  */
 class McryptHasherServiceProvider extends ServiceProvider
 {
