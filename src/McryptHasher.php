@@ -79,39 +79,12 @@ class McryptHasher implements Hasher
     }
 
     /**
-     * Check if the given hash needs to be rehashed based on the given options.
+     * Implemented to fulfill the contract.
      *
      * @param string $hashedValue
      * @param array $options
-     * @return bool
+     * @return void
      */
-    public function needsRehash($hashedValue, array $options = []) {
-        return password_needs_rehash($hashedValue, MCRYPT_BLOWFISH, [
-            'cost' => $this->cost($options)
-        ]);
-    }
-
-    /**
-     * Set the default password work factor.
-     *
-     * @param  int  $rounds
-     * @return $this
-     */
-    public function setRounds($rounds)
-    {
-        $this->rounds = (int) $rounds;
-        return $this;
-    }
-
-    /**
-     * Extract the cost value from the options array.
-     *
-     * @param  array  $options
-     * @return int
-     */
-    protected function cost(array $options = [])
-    {
-        return $options['rounds'] ?? $this->rounds;
-    }
+    public function needsRehash($hashedValue, array $options = []) {}
 }
 
