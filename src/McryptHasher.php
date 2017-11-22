@@ -79,7 +79,8 @@ class McryptHasher implements Hasher
     }
 
     /**
-     * stub
+     * Check if the given hash needs to be rehashed based on the given options.
+     *
      * @param string $hashedValue
      * @param array $options
      * @return bool
