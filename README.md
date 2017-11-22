@@ -10,6 +10,6 @@ This package will replace Laravel's default hash service provider.
 3. If you are using Laravel 5.5+, this package will be auto-discovered. Otherwise, add `ElasticQueue\ElasticQueueServiceProvider::class,` to config/app.php
     
 ## Usage
-Once installed the mcrypt hasher will automaatically be used durring authentication and registration. You may also resolve the hasher out of the service container as you normally would. `app'('hash')->make($string)`
+Once installed the mcrypt hasher will automatically be used durring authentication and registration. You may also resolve the hasher out of the service container as you normally would. `app'('hash')->make($string)`
 
 ###### Copyright &copy; 2017 Broker Exchange Network
