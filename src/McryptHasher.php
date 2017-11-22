@@ -22,6 +22,8 @@ class McryptHasher implements Hasher
      */
     protected $key;
 
+    protected $rounds = 10;
+
     /**
      * McryptHasher constructor.
      * @param $key
@@ -80,8 +82,35 @@ class McryptHasher implements Hasher
      * stub
      * @param string $hashedValue
      * @param array $options
-     * @return void
+     * @return bool
      */
-    public function needsRehash($hashedValue, array $options = []) {}
+    public function needsRehash($hashedValue, array $options = []) {
+        return password_needs_rehash($hashedValue, MCRYPT_BLOWFISH, [
+            'cost' => $this->cost($options)
+        ]);
+    }
+
+    /**
+     * Set the default password work factor.
+     *
+     * @param  int  $rounds
+     * @return $this
+     */
+    public function setRounds($rounds)
+    {
+        $this->rounds = (int) $rounds;
+        return $this;
+    }
+
+    /**
+     * Extract the cost value from the options array.
+     *
+     * @param  array  $options
+     * @return int
+     */
+    protected function cost(array $options = [])
+    {
+        return $options['rounds'] ?? $this->rounds;
+    }
 }
 
