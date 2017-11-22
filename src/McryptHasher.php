@@ -13,7 +13,7 @@ use RuntimeException;
 
 /**
  * Class McryptHasher
- * @package App\Mcrypt
+ * @package McryptHasher
  */
 class McryptHasher implements Hasher
 {

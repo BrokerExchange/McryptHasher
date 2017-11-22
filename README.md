@@ -5,10 +5,11 @@ This package will replace Laravel's default hash service provider.
 
 ## Installation
 1. `composer require brokerexchange/mcrypthasher`
-2. Add HASH_KEY to your .env file
-    - `HASH_KEY='My awesome hash key'`
+2. Add MCRYPT_KEY to your .env file
+    - `MCRYPT_KEY='My awesome hash key'`
+3. If you are using Laravel 5.5+, this package will be auto-discovered. Otherwise, add `ElasticQueue\ElasticQueueServiceProvider::class,` to config/app.php
     
 ## Usage
-Just use the `hash` service provider as you normally would.
+Once installed the mcrypt hasher will automaatically be used durring authentication and registration. You may also resolve the hasher out of the service container as you normally would. `app'('hash')->make($string)`
 
 ###### Copyright &copy; 2017 Broker Exchange Network
