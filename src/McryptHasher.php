@@ -22,6 +22,8 @@ class McryptHasher implements Hasher
      */
     protected $key;
 
+    protected $rounds = 10;
+
     /**
      * McryptHasher constructor.
      * @param $key
@@ -77,7 +79,8 @@ class McryptHasher implements Hasher
     }
 
     /**
-     * stub
+     * Implemented to fulfill the contract.
+     *
      * @param string $hashedValue
      * @param array $options
      * @return void
