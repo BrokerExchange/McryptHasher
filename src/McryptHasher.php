@@ -38,6 +38,14 @@ class McryptHasher implements Hasher
     }
 
     /**
+     * Get information about the given hashed value. Implemented because of update to hasher interface.
+     *
+     * @param  string  $hashedValue
+     * @return void
+     */
+    public function info($hashedValue){}
+
+    /**
      * @param string $value
      * @param array $options
      * @return string
