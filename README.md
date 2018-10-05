@@ -12,4 +12,4 @@ This package will replace Laravel's default hash service provider.
 ## Usage
 Once installed the mcrypt hasher will automatically be used during authentication and registration. You may also resolve the hasher out of the service container as you normally would. `app'('hash')->make($string)`
 
-###### Copyright &copy; 2017 Broker Exchange Network
+###### Copyright &copy; 2018 Broker Exchange Network
