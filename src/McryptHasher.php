@@ -86,5 +86,13 @@ class McryptHasher implements Hasher
      * @return void
      */
     public function needsRehash($hashedValue, array $options = []) {}
+
+    /**
+     * Implemented to fulfill the contract.
+     *
+     * @param string $hashedValue
+     * @return void
+     */
+    public function info(string $hashedValue) {}
 }
 
