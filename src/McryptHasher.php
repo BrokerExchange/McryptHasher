@@ -9,20 +9,19 @@
 namespace McryptHasher;
 
 use Illuminate\Contracts\Hashing\Hasher;
+use Illuminate\Hashing\AbstractHasher;
 use RuntimeException;
 
 /**
  * Class McryptHasher
  * @package McryptHasher
  */
-class McryptHasher implements Hasher
+class McryptHasher extends AbstractHasher implements Hasher
 {
     /**
      * @var
      */
     protected $key;
-
-    protected $rounds = 10;
 
     /**
      * McryptHasher constructor.
@@ -38,19 +37,11 @@ class McryptHasher implements Hasher
     }
 
     /**
-     * Get information about the given hashed value. Implemented because of update to hasher interface.
-     *
-     * @param  string  $hashedValue
-     * @return void
-     */
-    public function info($hashedValue){}
-
-    /**
      * @param string $value
      * @param array $options
      * @return string
      */
-    public function make($value, array $options = [])
+    public function make($value, array $options = []): string
     {
         //make sure the input is valid
         if(empty($value)) {
@@ -77,7 +68,7 @@ class McryptHasher implements Hasher
      * @param array $options
      * @return bool
      */
-    public function check($value, $hashedValue, array $options = [])
+    public function check($value, $hashedValue, array $options = []): bool
     {
         if (strlen($hashedValue) === 0 || strlen($value) === 0) {
             return false;
@@ -91,8 +82,11 @@ class McryptHasher implements Hasher
      *
      * @param string $hashedValue
      * @param array $options
-     * @return void
+     * @return false
      */
-    public function needsRehash($hashedValue, array $options = []) {}
+    public function needsRehash($hashedValue, array $options = []): bool
+    {
+        return false;
+    }
 }
 
