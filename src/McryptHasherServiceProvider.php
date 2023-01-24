@@ -8,8 +8,8 @@
 
 namespace McryptHasher;
 
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Str;
 
 /**
  * Class McryptHasherServiceProvider
@@ -17,41 +17,20 @@ use Illuminate\Support\Str;
  */
 class McryptHasherServiceProvider extends ServiceProvider
 {
-    /**
-     * Indicates if loading of the provider is deferred.
-     *
-     * @var bool
-     */
-    protected $defer = true;
 
     /**
      * Bootstrap any application services.
      *
      * @return void
      */
-    public function register()
+    public function boot()
     {
         $this->mergeConfigFrom(
             __DIR__.'/../config/mcrypt.php', 'app.mcrypt'
         );
 
-        $this->app->singleton('hash', function () {
-
-            if (Str::startsWith($key = config('app.mcrypt.key'), 'base64:')) {
-                $key = base64_decode(substr($key, 7));
-            }
-
-            return new McryptHasher($key);
+        Hash::extend('mcrypt', static function () {
+            return new McryptHasher();
         });
-    }
-
-    /**
-     * Get the services provided by the provider.
-     *
-     * @return array
-     */
-    public function provides()
-    {
-        return ['hash'];
     }
 }
