@@ -46,7 +46,7 @@ class McryptHasherServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->mergeConfigFrom(
-            __DIR__.'/../config/mcrypt.php', 'mcrypt.key'
+            __DIR__.'/../config/mcrypt.php', 'mcrypt'
         );
 
         Hash::extend('mcrypt', static function(){
