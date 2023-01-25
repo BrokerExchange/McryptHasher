@@ -23,6 +23,8 @@ class McryptHasher extends AbstractHasher implements Hasher
      */
     protected $key;
 
+    protected $rounds = 10;
+
     /**
      * McryptHasher constructor.
      * @param $key
@@ -37,11 +39,19 @@ class McryptHasher extends AbstractHasher implements Hasher
     }
 
     /**
+     * Get information about the given hashed value. Implemented because of update to hasher interface.
+     *
+     * @param  string  $hashedValue
+     * @return void
+     */
+    public function info($hashedValue){}
+
+    /**
      * @param string $value
      * @param array $options
      * @return string
      */
-    public function make($value, array $options = []): string
+    public function make($value, array $options = [])
     {
         //make sure the input is valid
         if(empty($value)) {
@@ -68,7 +78,7 @@ class McryptHasher extends AbstractHasher implements Hasher
      * @param array $options
      * @return bool
      */
-    public function check($value, $hashedValue, array $options = []): bool
+    public function check($value, $hashedValue, array $options = [])
     {
         if (strlen($hashedValue) === 0 || strlen($value) === 0) {
             return false;
@@ -82,11 +92,9 @@ class McryptHasher extends AbstractHasher implements Hasher
      *
      * @param string $hashedValue
      * @param array $options
-     * @return false
+     * @return bool
      */
-    public function needsRehash($hashedValue, array $options = []): bool
-    {
+    public function needsRehash($hashedValue, array $options = []) {
         return false;
     }
 }
-
